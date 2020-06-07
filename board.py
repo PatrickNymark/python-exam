@@ -2,17 +2,26 @@ from box import Box
 from ship import Ship
 
 class Board():
-    def __init__(self, rows, cols, ships = []):
+    def __init__(self, rows, cols, ships=None):
         self.rows = rows
         self.cols = cols
-        self.ships = ships
+        if ships is None:
+            ships = []
+
+        self.ships = []
 
     def make_move(self, coordinates):
-        print(self.ships)
         for ship in self.ships:
             if ship.check_if_hit(coordinates):
+                print("Hit!")
+
+                if ship.check_if_sunken():
+                    print("Ship sunken!")
+
+                
                 return True
-            
+        
+        print("Miss!")
         return False
         
     def initialize_board(self):
@@ -40,6 +49,12 @@ class Board():
         spaced_coordinates = '     '.join(board_x_coordinates)
         print(f"    {spaced_coordinates} \n")
 
+    def check_if_fleet_sunken(self):
+        for ship in self.ships:
+            if ship.sunken:
+                return True
+
+
     def new_ship(self, coordinates):
         entries = []
         ## refactor ##
@@ -49,11 +64,10 @@ class Board():
                     if entry.position_x == n[0] and entry.position_y == n[1]:
                         entries.append(entry)
 
+        
         ship = Ship(entries)
         ship.initialize_entries()
-        print(ship)
         self.ships.append(ship)
-        print(self.ships)
 
-    def __str__(self):
-        return f"Board({self.entries})"
+    # def __str__(self):
+    #     return f"Board({self.entries})"

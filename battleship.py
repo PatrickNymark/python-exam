@@ -2,22 +2,15 @@
 
 
 from board import Board
-from ship import Ship 
-from box import Box 
 from player import Player
 from game import Game
+
 import os
 
-
 import game_options
-
-
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
     
 def main():
-    clear()
+    game_options.clear()
     game_options.initial_options()
 
     option = int(input("Please choose option: "))
@@ -58,7 +51,6 @@ def main():
     
     game = Game([player1, player2])
     game.start_game()
-
 
 
 if __name__ == "__main__":

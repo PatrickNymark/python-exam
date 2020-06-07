@@ -13,7 +13,7 @@ class Ship():
         return False
     
     def check_if_sunken(self):
-        return all(entry for entry in self.entries if entry.sunken)
+        self.sunken = all(entry.is_hit for entry in self.entries)
 
     def initialize_entries(self):
         for entry in self.entries:
