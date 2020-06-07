@@ -1,5 +1,6 @@
 from box import Box
 from ship import Ship
+import game_options
 
 class Board():
     def __init__(self, rows, cols, ships=None):
@@ -11,13 +12,16 @@ class Board():
         self.ships = []
 
     def make_move(self, coordinates):
+        game_options.clear()
+        
         for ship in self.ships:
             if ship.check_if_hit(coordinates):
+                game_options.clear()
                 print("Hit!")
 
                 if ship.check_if_sunken():
-                    print("Ship sunken!")
-
+                    ship.change_to_sunken()
+                    print("Ship sunken!") 
                 
                 return True
         
@@ -41,19 +45,17 @@ class Board():
             reversed_idx = len(self.entries) - idx
 
             if anonymous:
-                print(reversed_idx, ' '.join(x.anonymous_format(True) for x in row))
+                print(reversed_idx, ' '.join(x.anonymous_format() for x in row))
             else:
                 print(reversed_idx, *row)
-                
+        
         board_x_coordinates = [str(i + 1) for i in range(self.cols)]
+        # make format match the columns in the board print
         spaced_coordinates = '     '.join(board_x_coordinates)
         print(f"    {spaced_coordinates} \n")
 
     def check_if_fleet_sunken(self):
-        for ship in self.ships:
-            if ship.sunken:
-                return True
-
+        return all(ship.check_if_sunken() for ship in self.ships)
 
     def new_ship(self, coordinates):
         entries = []

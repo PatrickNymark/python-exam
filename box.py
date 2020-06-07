@@ -16,10 +16,13 @@ class Box():
         self.is_ship = True
 
     def change_to_hit(self):
-        self.symbol = 'X'
+        self.symbol = '/'
         self.is_hit = True
+    
+    def change_to_sunken(self):
+        self.symbol = 'X'
 
-    def anonymous_format(self, anonymous):
+    def anonymous_format(self):
         """ Used to print anonymous format when printed for the opponent
         except if the opponent has already hit that position.
         """

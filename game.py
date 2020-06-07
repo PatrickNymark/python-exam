@@ -14,8 +14,6 @@ class Game:
         """
         Starts the game, and runs until one player has won
         """
-        # for player in self.players:
-        #     player.initialize_ships()
         self.initialize_game()
     
         while True:
@@ -24,6 +22,7 @@ class Game:
             opponent = current_turn[1]
             
             input("\n" + current.name + ", please enter if you are ready! \n")
+            game_options.board_options()
             game_options.make_move_options(current_turn)
 
             coordinate_input = input("Coordinates to attack: ")
@@ -33,9 +32,8 @@ class Game:
             result = opponent.board.make_move(coordinates)
 
             if result:
-                if current_turn[1].board.check_if_fleet_sunken():
-                    print("\n")
-                    print("All ships are down! \nYou have won!")
+                if opponent.board.check_if_fleet_sunken():
+                    game_options.game_over(current, opponent)
                     break
             
             self.turns += 1
