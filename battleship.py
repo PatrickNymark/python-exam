@@ -28,7 +28,7 @@ def main():
             
             board_1 = Board(int(rows), int(cols))
             board_2 = Board(int(rows), int(cols))
-1
+
             board_1.initialize_board()
             board_2.initialize_board()
 

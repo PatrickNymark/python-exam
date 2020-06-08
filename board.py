@@ -57,7 +57,7 @@ class Board():
         # make format match the columns in the board print
         spaced_coordinates = '     '.join(board_x_coordinates[0:9])
         spaced_coordinates += "     "
-        spaced_coordinates += '    '.join(board_x_coordinates[9::])
+        spaced_coordinates += '    '.join(board_x_coordinates[9:])
         print(f"     {spaced_coordinates} \n")
 
     def check_if_fleet_sunken(self):
