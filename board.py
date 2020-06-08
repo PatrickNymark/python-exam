@@ -43,16 +43,22 @@ class Board():
     def print_board(self, anonymous = False):
         for idx, row in enumerate(self.entries):
             reversed_idx = len(self.entries) - idx
+            output = str(reversed_idx)
 
+            if reversed_idx < 10:
+                output += " "
+                
             if anonymous:
-                print(reversed_idx, ' '.join(x.anonymous_format() for x in row))
+                print(output, ' '.join(x.anonymous_format() for x in row))
             else:
-                print(reversed_idx, *row)
+                print(output, *row)
         
         board_x_coordinates = [str(i + 1) for i in range(self.cols)]
         # make format match the columns in the board print
-        spaced_coordinates = '     '.join(board_x_coordinates)
-        print(f"    {spaced_coordinates} \n")
+        spaced_coordinates = '     '.join(board_x_coordinates[0:9])
+        spaced_coordinates += "     "
+        spaced_coordinates += '    '.join(board_x_coordinates[9::])
+        print(f"     {spaced_coordinates} \n")
 
     def check_if_fleet_sunken(self):
         return all(ship.check_if_sunken() for ship in self.ships)

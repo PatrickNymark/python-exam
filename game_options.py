@@ -22,14 +22,17 @@ def initial_options():
     print("1 - Quick start")
     print("2 - Custom Game \n")
 
+def fleets_options(fleets):
+    print("\nYou have following fleets to choose from: ")
+    for i in range(len(fleets)):
+        print(f"{i + 1} -", *fleets[i])
 
-def fleet_options():
+def fleet_options(fleet):
     clear()
     print("\nYou have following ships:")
-    print(" - Carrier    : 4")
-    print(" - Destroyer  : 3")
-    print(" - Battleship : 2")
-
+    for i in range(len(fleet)):
+        print(f"{i + 1} - {fleet[i][0]}: {fleet[i][1]}")
+        
     print("\nFormat x,y")
     print("Example: 1,1 \n")
 

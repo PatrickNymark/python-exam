@@ -1,22 +1,20 @@
 import game_options
 
-ships = [ ('Carrier', 2), ('Destroyer', 3)]
-
-
 class Player:
-    def __init__(self, name, board):
+    def __init__(self, name, board, fleet):
         self.name = name
         self.board = board
+        self.fleet = fleet
 
     def initialize_ships(self):
         """ initializes the entries for all ships
             and adds them to the players game board.
         """
-        game_options.fleet_options()
+        game_options.fleet_options(self.fleet)
 
         input(self.name + ", please enter if you are ready!")
     
-        for ship in ships:
+        for ship in self.fleet:
             ship_coordinates = []
 
             self.board.print_board()
